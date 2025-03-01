@@ -1,0 +1,66 @@
+[gd_scene load_steps=15 format=3 uid="uid://dkbm1l62unke7"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_xl1v1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7sew5"]
+albedo_color = Color(0.993774, 0.4324, 1.92523e-07, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_8h7xq"]
+material = SubResource("StandardMaterial3D_7sew5")
+
+[sub_resource type="SphereMesh" id="SphereMesh_j40x0"]
+
+[sub_resource type="MeshTexture" id="MeshTexture_fhhmp"]
+mesh = SubResource("SphereMesh_j40x0")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sk72h"]
+metallic = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_kr1xo"]
+material = SubResource("StandardMaterial3D_sk72h")
+
+[sub_resource type="MeshTexture" id="MeshTexture_4pcdf"]
+mesh = SubResource("SphereMesh_kr1xo")
+base_texture = SubResource("MeshTexture_fhhmp")
+
+[sub_resource type="CameraTexture" id="CameraTexture_7fr0o"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_yfuce"]
+frames = 6
+one_shot = true
+speed_scale = 60.0
+frame_1/duration = 1.0
+frame_2/duration = 1.0
+frame_3/duration = 1.0
+frame_4/duration = 1.0
+frame_5/texture = SubResource("CameraTexture_7fr0o")
+frame_5/duration = 14.96
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_s126o"]
+normal_texture = SubResource("AnimatedTexture_yfuce")
+texture_filter = 3
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4627g"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2hprc"]
+next_pass = SubResource("ProceduralSkyMaterial_4627g")
+albedo_color = Color(1, 0.643137, 0, 1)
+albedo_texture = SubResource("MeshTexture_4pcdf")
+metallic = 0.6
+metallic_specular = 1.0
+metallic_texture = SubResource("CanvasTexture_s126o")
+
+[sub_resource type="SphereMesh" id="SphereMesh_4ynsy"]
+material = SubResource("StandardMaterial3D_2hprc")
+
+[node name="housebottom" type="MeshInstance3D"]
+transform = Transform3D(3.95772, 0, 0, 0, 4.64774, 0, 0, 0, 8.43173, 0, 2.38792, 0)
+mesh = SubResource("BoxMesh_xl1v1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.00222301, -0.00333129, 0.963876, 0.00610055, 0.58202, 0.00575848, -0.23094, 0.0154068, -0.00912607, 0.5026, -0.198627, 0.0276401)
+mesh = SubResource("QuadMesh_8h7xq")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.048218, 0, 0, 0, 0.0939387, 0, 0, 0, 0.0461958, 0.533567, -0.166662, -0.0498717)
+mesh = SubResource("SphereMesh_4ynsy")

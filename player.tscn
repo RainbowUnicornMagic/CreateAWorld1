@@ -1,0 +1,115 @@
+[gd_scene load_steps=20 format=3 uid="uid://chyojhhn4xrrq"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_4hsc7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eof4s"]
+albedo_color = Color(1, 0.827451, 0.678431, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_yaf6p"]
+material = SubResource("StandardMaterial3D_eof4s")
+
+[sub_resource type="Skin" id="Skin_i4fo0"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tjbuf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r4l6b"]
+albedo_color = Color(0.999834, 0.828818, 0.678009, 1)
+metallic_specular = 0.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_iwnu2"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_c7ui1"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_w780x"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_thdo1"]
+albedo_color = Color(0.941176, 0.85098, 0.752941, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_aqaci"]
+material = SubResource("StandardMaterial3D_thdo1")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3fmmr"]
+albedo_color = Color(0.0155778, 0.858695, 0.83668, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_qr6xm"]
+material = SubResource("StandardMaterial3D_3fmmr")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_va4op"]
+albedo_color = Color(0.898039, 0.803922, 0.709804, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_lkv08"]
+material = SubResource("StandardMaterial3D_va4op")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oausk"]
+albedo_color = Color(1, 0.498039, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_0ar1r"]
+material = SubResource("StandardMaterial3D_oausk")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c71av"]
+albedo_color = Color(1, 0.498039, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_2f11r"]
+material = SubResource("StandardMaterial3D_c71av")
+
+[node name="player" type="RigidBody3D"]
+transform = Transform3D(0.0575292, 0, -0.998344, 0, 1, 0, 0.998344, 0, 0.0575292, -0.00273514, 0.00492978, -0.141223)
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+script = ExtResource("1_4hsc7")
+
+[node name="neck" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -0.000848055, 1.82686, 0.00387275)
+mesh = SubResource("CylinderMesh_yaf6p")
+skin = SubResource("Skin_i4fo0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.10465, 1.18659, 0)
+shape = SubResource("CapsuleShape3D_tjbuf")
+
+[node name="head" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, -0.000793934, 2.74114, 0.00362703)
+material_overlay = SubResource("StandardMaterial3D_r4l6b")
+mesh = SubResource("SphereMesh_iwnu2")
+
+[node name="clothes round top" type="MeshInstance3D" parent="head"]
+transform = Transform3D(0.870853, 0, 0, 0, 0.962773, 0, 0, 0, 1.00336, -0.0131073, -0.849589, -0.0108494)
+mesh = SubResource("SphereMesh_c7ui1")
+skeleton = NodePath("../../neck")
+
+[node name="clothes bottom" type="MeshInstance3D" parent="head/clothes round top"]
+transform = Transform3D(1, 0, 0, 0, 0.316133, 0, 0, 0, 1, 0, -0.312731, 0)
+mesh = SubResource("CylinderMesh_w780x")
+
+[node name="leg1" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.00169754, 1.09402, 0.357505)
+mesh = SubResource("CylinderMesh_aqaci")
+
+[node name="leg2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.00249624, 1.09402, -0.35037)
+mesh = SubResource("CylinderMesh_aqaci")
+
+[node name="shoe1" type="MeshInstance3D" parent="leg2"]
+transform = Transform3D(-0.00225146, -0.999997, 0, 0.999997, -0.00225146, 0, 0, 0, 1, 0.33841, -1.19497, 0)
+mesh = SubResource("CapsuleMesh_qr6xm")
+
+[node name="shoe2" type="MeshInstance3D" parent="leg2"]
+transform = Transform3D(-0.00225146, -0.999997, 0, 0.999997, -0.00225146, 0, 0, 0, 1, 0.33841, -1.19497, 2.35492)
+mesh = SubResource("CapsuleMesh_qr6xm")
+
+[node name="arm1" type="MeshInstance3D" parent="leg2/shoe2"]
+transform = Transform3D(0.460908, -1.11351, -0.0672997, -0.000935561, 0.0730369, -1.43129, 0.717438, 0.715456, 0.0413693, 3.2897, -0.0150544, 0.63164)
+mesh = SubResource("CapsuleMesh_lkv08")
+
+[node name="arm2" type="MeshInstance3D" parent="leg2/shoe2"]
+transform = Transform3D(0.457982, 1.11673, 0.0612062, -0.000928973, 0.0680156, -1.43158, -0.719309, 0.710928, 0.0408186, 3.28959, -0.0662525, -3.04668)
+mesh = SubResource("CapsuleMesh_lkv08")
+
+[node name="hair bottom" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.230413, 2.35845, 0.030362)
+mesh = SubResource("CapsuleMesh_0ar1r")
+
+[node name="fringe" type="MeshInstance3D" parent="hair bottom"]
+transform = Transform3D(1, 0, 0, 0, 0.887394, 0, 0, 0, 1.16869, 0.208297, 0.520843, 0)
+mesh = SubResource("SphereMesh_2f11r")

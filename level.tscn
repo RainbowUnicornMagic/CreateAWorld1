@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://dva8a4keidnvt"]
+
+[ext_resource type="PackedScene" uid="uid://chyojhhn4xrrq" path="res://player.tscn" id="1_wobnc"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_liwlc"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_3cy0o"]
+sky_material = SubResource("ProceduralSkyMaterial_liwlc")
+
+[sub_resource type="Environment" id="Environment_qm63q"]
+background_mode = 2
+sky = SubResource("Sky_3cy0o")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iwr7y"]
+albedo_color = Color(3.63387e-06, 0.643698, 0, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_tcit8"]
+material = SubResource("StandardMaterial3D_iwr7y")
+size = Vector2(100, 100)
+
+[sub_resource type="Skin" id="Skin_gvbao"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nmnt0"]
+size = Vector3(1428.19, 0.001, 1286.82)
+
+[node name="world" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_qm63q")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.999946, -0.00619707, 0.00840025, -0.00191639, 0.682059, 0.731294, -0.0102614, -0.731271, 0.68201, 0.0288601, 20.7818, 44.9539)
+
+[node name="ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.67597, 0, 0, 0, 1, 0, 0, 0, 1.86227, 1, 0, 0.66302)
+mesh = SubResource("PlaneMesh_tcit8")
+skin = SubResource("Skin_gvbao")
+skeleton = NodePath("../Camera3D")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.35723, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ground/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.5046, 1.37231, -42.8121)
+shape = SubResource("BoxShape3D_nmnt0")
+
+[node name="player" parent="." instance=ExtResource("1_wobnc")]
