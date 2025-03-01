@@ -1,5 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://dva8a4keidnvt"]
 
+[ext_resource type="Material" uid="uid://8oxdceq8w0lt" path="res://grass.tres" id="1_dvc42"]
 [ext_resource type="PackedScene" uid="uid://chyojhhn4xrrq" path="res://player.tscn" id="1_wobnc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_liwlc"]
@@ -15,11 +16,8 @@ sky = SubResource("Sky_3cy0o")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iwr7y"]
-albedo_color = Color(3.63387e-06, 0.643698, 0, 1)
-
 [sub_resource type="PlaneMesh" id="PlaneMesh_tcit8"]
-material = SubResource("StandardMaterial3D_iwr7y")
+material = ExtResource("1_dvc42")
 size = Vector2(100, 100)
 
 [sub_resource type="Skin" id="Skin_gvbao"]
@@ -41,6 +39,7 @@ transform = Transform3D(0.999946, -0.00619707, 0.00840025, -0.00191639, 0.682059
 
 [node name="ground" type="MeshInstance3D" parent="."]
 transform = Transform3D(2.67597, 0, 0, 0, 1, 0, 0, 0, 1.86227, 1, 0, 0.66302)
+material_override = ExtResource("1_dvc42")
 mesh = SubResource("PlaneMesh_tcit8")
 skin = SubResource("Skin_gvbao")
 skeleton = NodePath("../Camera3D")
