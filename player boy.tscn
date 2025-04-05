@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://5rjct050yfk6"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qv8mb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bgrev"]
+albedo_color = Color(1, 0.798856, 0.630813, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_2y83k"]
+material = SubResource("StandardMaterial3D_bgrev")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t7bnk"]
+albedo_color = Color(1, 0.8, 0.631373, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_r0xox"]
+material = SubResource("StandardMaterial3D_t7bnk")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_befrp"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_41d7f"]
+
+[node name="RigidBody3D" type="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0975622, 1.51282, -0.121079)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.68098, 0)
+shape = SubResource("CapsuleShape3D_qv8mb")
+
+[node name="head" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.68098, 0.000956059)
+mesh = SubResource("SphereMesh_2y83k")
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="neck" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.585819, 0, 0, 0, 0.647311, 0, 0, 0, 0.582112, -0.00726175, 1.10888, 0.0155337)
+mesh = SubResource("CapsuleMesh_r0xox")
+
+[node name="body" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.935806, 0, 0, 0, 0.711791, 0, 0, 0, 0.946719, -0.00135088, 0.629457, -0.0379595)
+mesh = SubResource("CapsuleMesh_befrp")
+
+[node name="leg1" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.302871, 0, 0, 0, 0.325002, 0, 0, 0, 0.320399, -0.274925, -0.130672, 0.00608587)
+mesh = SubResource("CapsuleMesh_41d7f")
+skeleton = NodePath("../body")
+
+[node name="leg2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.302871, 0, 0, 0, 0.325002, 0, 0, 0, 0.320399, 0.260462, -0.130672, 0.00608587)
+mesh = SubResource("CapsuleMesh_41d7f")
+skeleton = NodePath("../body")
